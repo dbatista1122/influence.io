@@ -2,7 +2,6 @@ var express = require('express');
 const db = require('../../db/db');
 var router = express.Router();
 
-
 /* GET users async req. */
 router.get('/getUsers', async(req, res) => {
     try {
