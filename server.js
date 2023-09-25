@@ -9,15 +9,11 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const { parse } = require('url');
 
-const userRoutes = require('./routes/users.js');
-
 app.prepare().then(() => {
   const server = express();
 
   server.use(bodyParser.json());
   
-  server.use('/users', userRoutes);
-
   server.get("*", (req, res) => {
     return handle(req, res);
   });
