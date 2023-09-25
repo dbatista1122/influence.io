@@ -9,26 +9,26 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const { parse } = require('url');
 
-const userRoutes = require('./server/routes/users.js');
+const userRoutes = require('./routes/users.js');
 
 app.prepare().then(() => {
   const server = express();
 
   server.use(bodyParser.json());
-  server.use(session({
-    secret: 'super-secret-key',
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 60000 }
-  }));
-
+  
   server.use('/users', userRoutes);
 
-  server.get('*', (req, res) => {
+  server.get("*", (req, res) => {
     return handle(req, res);
   });
 
-  server.listen(3000, (err) => {
+  server.post("*", (req, res) => {
+    return handle(req, res);
+  });
+
+  const PORT = process.env.PORT || 3000;
+
+  server.listen(PORT, (err) => {
     if (err) throw err;
     console.log('Server ready on http://localhost:3000');
   });
