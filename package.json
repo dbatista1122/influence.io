@@ -8,6 +8,8 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
     "autoprefixer": "10.4.16",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -24,6 +26,7 @@
     "postcss": "8.4.30",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-icons": "^4.11.0",
     "sequelize": "^6.33.0",
     "sequelize-cli": "^6.6.1",
     "start": "^5.1.0",
