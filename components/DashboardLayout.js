@@ -24,19 +24,22 @@ const DashboardLayout = ({ children }) => {
         <nav>
           <ul className="grid gap-3 pt-6">
             <li className="">
-              <ActiveMenuLink href="/dashboard/analytics">Facebook</ActiveMenuLink>
+              <ActiveMenuLink href="/dashboard/analytics">Accounts</ActiveMenuLink>
             </li>
             <li>
-              <ActiveMenuLink href="/dashboard/Option 1">Instagram</ActiveMenuLink>
+              <ActiveMenuLink href="/dashboard/facebook">Facebook</ActiveMenuLink>
             </li>
             <li>
-              <ActiveMenuLink href="/dashboard/Option 2">Tik Tok</ActiveMenuLink>
+              <ActiveMenuLink href="/dashboard/instagram">Instagram</ActiveMenuLink>
             </li>
             <li>
-              <ActiveMenuLink href="/dashboard/Option 2">Youtube</ActiveMenuLink>
+              <ActiveMenuLink href="/dashboard/tiktok">TikTok</ActiveMenuLink>
             </li>
             <li>
-              <ActiveMenuLink href="/dashboard/Option 2">Twitter</ActiveMenuLink>
+              <ActiveMenuLink href="/dashboard/youtube">Youtube</ActiveMenuLink>
+            </li>
+            <li>
+              <ActiveMenuLink href="/dashboard/twitter">Twitter</ActiveMenuLink>
             </li>
           </ul>
         </nav>

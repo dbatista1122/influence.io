@@ -2,7 +2,7 @@ import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 
 const Analytics = () => {
-  return <div>General info/account connection here...</div>;
+  return <div>Tiktok here...</div>;
 };
 
 Analytics.getLayout = (page) => (
