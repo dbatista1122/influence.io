@@ -25,7 +25,7 @@ export const Profile = () => {
 
       <div>
         <form onSubmit={handleSubmit}>
-          <div className="grid gap-6 mb-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <label
                 htmlFor="first_name"
@@ -61,7 +61,7 @@ export const Profile = () => {
               />
             </div>
           </div>
-          <div className="mb-6">
+          <div>
             <label
               htmlFor="email"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -78,7 +78,7 @@ export const Profile = () => {
               required
             />
           </div>
-          <div className="mb-6">
+          <div>
             <label
               htmlFor="password"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

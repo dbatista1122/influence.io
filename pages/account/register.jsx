@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
-import RootLayout from "@/components/Layout";
 
 function Register() {
   return (
@@ -29,15 +28,17 @@ function SignUp() {
   function handleSubmit(evnt) {
     evnt.preventDefault();
 
-    console.log(`Email Address: ${emailAddress} Password: ${password}`);
+    console.log(
+      `First Name: ${firstName} Last Name: ${lastName} Email Address: ${emailAddress} Password: ${password}`
+    );
 
     router.push("/");
   }
 
   return (
-    <div className="w-3/5 p-5">
+    <div className="w-3/5 p-5 ">
       <Link href={"/"}>
-        <div className="text-left font-bold">
+        <div className="text-right font-bold">
           <span className="text-purple-500">Influence</span>
           <span>.io</span>
         </div>
@@ -98,7 +99,7 @@ function AccountInput({
   return (
     <form onSubmit={onSubmit}>
       <div className="flex flex-col items-center">
-        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
+        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3 rounded-full">
           <FaUserCircle className="text-gray-400 m-2" />
           <input
             type="text"
@@ -111,7 +112,7 @@ function AccountInput({
           />
         </div>
 
-        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
+        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3 rounded-full">
           <FaUserCircle className="text-gray-400 m-2" />
           <input
             type="text"
@@ -126,7 +127,7 @@ function AccountInput({
       </div>
 
       <div className="flex flex-col items-center mb-5">
-        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
+        <div className="bg-gray-100 w-64 p-2 flex items-center mb-3 rounded-full">
           <FaRegEnvelope className="text-gray-400 m-2" />
           <input
             type="email"
@@ -139,7 +140,7 @@ function AccountInput({
           />
         </div>
 
-        <div className="bg-gray-100 w-64 p-2 flex items-center">
+        <div className="bg-gray-100 w-64 p-2 flex items-center rounded-full">
           <MdLockOutline className="text-gray-400 m-2" />
           <input
             type="password"
