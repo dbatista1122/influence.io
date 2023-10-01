@@ -95,14 +95,14 @@ export const Profile = () => {
           </div>
           <div className="mb-6">
             <label
-              htmlFor="confirm_password"
+              htmlFor="confirmPassword"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               Confirm password
             </label>
             <input
               type="password"
-              id="confirm_password"
+              id="confirmPassword"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Password Confirm"
               required

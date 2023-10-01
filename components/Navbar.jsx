@@ -7,7 +7,7 @@ import Logo from "./Logo";
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const isLoggedIn = true; // TODO: Temp value to hide/show UI. Change to use authentication values
+  const isLoggedIn = false; // TODO: Temp value to hide/show UI. Change to use authentication values
 
   function handleSmallNavMenu() {
     setOpenMenu((menu) => !menu);
