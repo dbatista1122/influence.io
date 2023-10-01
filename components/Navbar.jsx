@@ -41,7 +41,8 @@ function LargeScreenNavbar({ isLoggedIn }) {
   return (
     <div className="hidden sm:flex">
       <ul className="hidden sm:flex">
-        {!isLoggedIn && (
+        {/* TODO: Server authentication */}
+        {/* {!isLoggedIn && (
           <>
             <Link href={"/account/register"}>
               <li className="ml-10 uppercase hover:border-b text-xl">Register</li>
@@ -61,6 +62,25 @@ function LargeScreenNavbar({ isLoggedIn }) {
             </Link>
           </>
         )}
+      </ul> */}
+
+        <>
+          <Link href={"/account/register"}>
+            <li className="ml-10 uppercase hover:border-b text-xl">Register</li>
+          </Link>
+          <Link href={"/account/login"}>
+            <li className="ml-10 uppercase hover:border-b text-xl">Login</li>
+          </Link>
+        </>
+
+        <>
+          <Link href={"/dashboard/analytics"}>
+            <li className="ml-10 uppercase hover:border-b text-xl">Dashboard</li>
+          </Link>
+          <Link href={"/account/profile"}>
+            <li className="ml-10 uppercase hover:border-b text-xl">Profile</li>
+          </Link>
+        </>
       </ul>
     </div>
   );
