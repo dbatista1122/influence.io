@@ -25,12 +25,37 @@ function SignUp() {
 
   const router = useRouter();
 
-  function handleSubmit(evnt) {
+  async function handleSubmit(evnt) {
     evnt.preventDefault();
 
     console.log(
       `First Name: ${firstName} Last Name: ${lastName} Email Address: ${emailAddress} Password: ${password}`
     );
+
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        // Registration was successful, redirect to a success page or login page
+        console.log(response); // Replace with the appropriate route
+      } else {
+        // Handle registration errors here
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+    }
 
     router.push("/");
   }

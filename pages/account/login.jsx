@@ -23,10 +23,33 @@ function SignIn() {
 
   const router = useRouter();
 
-  function handleSubmit(evnt) {
+  async function handleSubmit(evnt) {
     evnt.preventDefault();
 
     console.log(`Email Address: ${emailAddress} Password: ${password}`);
+
+    try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          emailAddress,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        // Registration was successful, redirect to a success page or login page
+        console.log(response); // Replace with the appropriate route
+      } else {
+        // Handle registration errors here
+        console.log(response);
+      }
+    } catch (error) {
+      console.error("Error logging in user:", error);
+    }
 
     router.push("/");
   }
