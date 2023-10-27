@@ -37,36 +37,34 @@ export default NextAuth({
         if (!user) return null;
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return null;
+        console.log(user);
         return user;
       },
     }),
   ],
-  callbacks: {
-    async session({ session }) {
-      return session;
-    },
-    async signIn({ profile }) {
-      console.log(profile);
-      return profile;
-    },
-    session({ session, token }) {
-      session.user.id = token.id;
-      session.user.email = token.email;
-      return session;
-    },
-    jwt({ token, account, user }) {
-      if (account) {
-        token.accessToken = account.access_token;
-        token.id = user.id;
-        token.email = user.email;
-        console.log({ user });
-      }
-      return token;
-    },
-  },
-  pages: {
-    signIn: "/account/login",
-  },
+  //   callbacks: {
+  //     async session({ session }) {
+  //       return session;
+  //     },
+  //     async signIn({ profile }) {
+  //       console.log(profile);
+  //       return profile;
+  //     },
+  //     session({ session, token }) {
+  //       session.user.id = token.id;
+  //       session.user.email = token.email;
+  //       return session;
+  //     },
+  //     jwt({ token, account, user }) {
+  //       if (account) {
+  //         token.accessToken = account.access_token;
+  //         token.id = user.id;
+  //         token.email = user.email;
+  //         console.log({ user });
+  //       }
+  //       return token;
+  //     },
+  //   },
   session: {
     strategy: "jwt",
   },

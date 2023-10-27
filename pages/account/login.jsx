@@ -34,7 +34,7 @@ function SignIn() {
       password: password,
     });
 
-    // router.push("/");
+    router.push("/");
   }
 
   return (

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "next dev",
     "build": "next build",
-    "start": "node server.js"
+    "start": "next start"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
