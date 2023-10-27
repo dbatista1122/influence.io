@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
+import { signIn } from 'next-auth/react';
 import Logo from "../../components/Logo";
-
 
 function Register() {
   return (
@@ -27,12 +27,37 @@ function SignUp() {
 
   const router = useRouter();
 
-  function handleSubmit(evnt) {
+  async function handleSubmit(evnt) {
     evnt.preventDefault();
 
     console.log(
       `First Name: ${firstName} Last Name: ${lastName} Email Address: ${emailAddress} Password: ${password}`
     );
+
+    const res = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+      }),
+    });
+
+    // Check if user has been created
+    const data = await res.json();
+    console.log(data);
+    if (!data.user) return null;
+
+    // Use next-auth to login user
+    await signIn('credentials', {
+      email: data.user.email,
+      password: password,
+      callbackUrl: '/',
+    });
 
     router.push("/");
   }
@@ -68,13 +93,13 @@ function SignUp() {
 function SocialMediaLogin() {
   return (
     <div className="flex justify-center my-2">
-      <Link href={"/"} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link href={"/"} onClick={() => signIn('google')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
         <FaGoogle className="text-sm" />
       </Link>
-      <Link href={"/"} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link href={"/"} onClick={() => signIn('facebook')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
         <FaFacebookF className="text-sm" />
       </Link>
-      <Link href={"/"} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link href={"/"} onClick={() => signIn('twitter')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
         <FaTwitter className="text-sm" />
       </Link>
     </div>
