@@ -7,7 +7,7 @@ import TwitterProvider from "next-auth/providers/twitter";
 import bcrypt from "bcrypt";
 import prisma from "../../../lib/prisma";
 
-const handler = NextAuth({
+export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -72,5 +72,3 @@ const handler = NextAuth({
   },
   secret: process.env.JWT_SECRET,
 });
-
-export default handler;
