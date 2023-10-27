@@ -3,15 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon server.js",
-    "build": "next build",
-    "start": "node server.js"
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/client": "^5.3.1",
     "autoprefixer": "10.4.16",
+    "bcrypt": "^5.1.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.3.1",
@@ -21,6 +23,7 @@
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
     "next": "13.5.2",
+    "next-auth": "^4.24.3",
     "nodemon": "^3.0.1",
     "npm": "^10.1.0",
     "pg": "^8.11.3",
@@ -33,6 +36,7 @@
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
+    "@types/react": "18.2.24",
     "vercel": "^32.3.1"
   }
 }
