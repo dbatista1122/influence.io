@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
+import Logo from "../../components/Logo";
 
 function Login() {
   return (
@@ -33,17 +34,10 @@ function SignIn() {
 
   return (
     <div className="w-3/5 p-5">
-      <Link href={"/"}>
-        <div className="text-left font-bold">
-          <span className="text-purple-500">Influence</span>
-          <span>.io</span>
-        </div>
-      </Link>
-
       <div className="py-10">
-        <h2 className="text-3xl font-bold text-purple-500">Sign into account</h2>
+        <h2 className="text-3xl font-bold">Sign into account</h2>
 
-        <div className="border-2 w-10 border-purple-500 inline-block mb-2"></div>
+        <div className="border-2 w-10 bg-gray-600 inline-block mb-2"></div>
 
         <SocialMediaLogin />
 
@@ -108,7 +102,7 @@ function AccountInput({ email, password, setEmailAddress, setPassword, onSubmit 
         </div>
       </div>
 
-      <button className="border-2 border-purple-500 text-purple-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-purple-500 hover:text-white">
+      <button className="border-2 rounded-full px-12 py-2 inline-block font-semibold hover:bg-gray-600 hover:text-white">
         Sign Up
       </button>
     </form>
@@ -117,13 +111,16 @@ function AccountInput({ email, password, setEmailAddress, setPassword, onSubmit 
 
 function SignUp() {
   return (
-    <div className="w-2/5 bg-purple-500 text-white py-36 px-12">
+    <div className="w-2/5 flex flex-col items-center bg-gray-600 text-white p-12">
+      <div className="pb-16">
+        <Logo/>
+      </div>
       <h2 className="text-3xl font-bold mb-2">Welcome to Influence.io</h2>
       <div className="border-2 w-10 border-white inline-block mb-2"></div>
       <p className="mb-5">Don't have an account?</p>
       <Link
         href={"/account/register"}
-        className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-purple-500"
+        className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold"
       >
         Sign Up
       </Link>

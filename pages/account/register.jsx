@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
+import Logo from "../../components/Logo";
+
 
 function Register() {
   return (
@@ -37,17 +39,11 @@ function SignUp() {
 
   return (
     <div className="w-3/5 p-5 ">
-      <Link href={"/"}>
-        <div className="text-right font-bold">
-          <span className="text-purple-500">Influence</span>
-          <span>.io</span>
-        </div>
-      </Link>
 
       <div className="py-10">
-        <h2 className="text-3xl font-bold text-purple-500">Sign up for an account</h2>
+        <h2 className="text-3xl font-bold">Sign up for an account</h2>
 
-        <div className="border-2 w-10 border-purple-500 inline-block mb-2"></div>
+        <div className="border-2 w-10 border-black inline-block mb-2"></div>
 
         <SocialMediaLogin />
 
@@ -154,8 +150,8 @@ function AccountInput({
         </div>
       </div>
 
-      <button className="border-2 border-purple-500 text-purple-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-purple-500 hover:text-white">
-        Sign Up
+      <button className="border-2 border-gray-200 rounded-full px-12 py-2 inline-block font-semibold hover:bg-gray-600 hover:text-white">
+        Sign In
       </button>
     </form>
   );
@@ -163,16 +159,21 @@ function AccountInput({
 
 function SignIn() {
   return (
-    <div className="w-2/5 bg-purple-500 text-white py-36 px-12">
-      <h2 className="text-3xl font-bold mb-2">Welcome to Influence.io</h2>
-      <div className="border-2 w-10 border-white inline-block mb-2"></div>
-      <p className="mb-5">Already have an account?</p>
-      <Link
-        href={"/account/login"}
-        className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-purple-500"
-      >
-        Sign In
-      </Link>
+    <div className="flex flex-col items-center bg-gray-600 object-center text-white py-20">
+      <div className="py-10">
+        <Logo/>
+      </div>
+      <div>
+        <h2 className="text-3xl font-bold mb-2">Welcome to Influence.io</h2>
+        <div className="border-2 w-10 border-white inline-block mb-2"></div>
+        <p className="mb-5">Already have an account?</p>
+        <Link
+          href={"/account/login"}
+          className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold"
+        >
+          Sign In
+        </Link>
+      </div>   
     </div>
   );
 }
