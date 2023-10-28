@@ -18,10 +18,11 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed w-full h-16 shadow-xl bg-white">
+    <nav className="fixed w-full h-16 shadow-xl bg-gray-600 text-slate-50	font-sans px-10">
       <div className="flex justify-between items-center h-full w-full px-4 2xl:px-16">
-        <Logo />
-
+        
+        <Logo/>
+  
         <LargeScreenNavbar isLoggedIn={isLoggedIn} />
 
         <HamburgerIcon handleNav={handleSmallNavMenu} />
@@ -40,7 +41,7 @@ const Navbar = () => {
 function LargeScreenNavbar({ isLoggedIn }) {
   return (
     <div className="hidden sm:flex">
-      <ul className="hidden sm:flex">
+      <ul className="hidden sm:flex md:flex-row md:space-x-8 md:mt-0 md:border-0">
         {/* TODO: Server authentication */}
         {/* {!isLoggedIn && (
           <>
@@ -64,23 +65,19 @@ function LargeScreenNavbar({ isLoggedIn }) {
         )}
       </ul> */}
 
-        <>
+   
           <Link href={"/account/register"}>
-            <li className="ml-10 uppercase hover:border-b text-xl">Register</li>
+            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">Register</li>
           </Link>
           <Link href={"/account/login"}>
-            <li className="ml-10 uppercase hover:border-b text-xl">Login</li>
+            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</li>
           </Link>
-        </>
-
-        <>
           <Link href={"/dashboard/analytics"}>
-            <li className="ml-10 uppercase hover:border-b text-xl">Dashboard</li>
+            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</li>
           </Link>
           <Link href={"/account/profile"}>
-            <li className="ml-10 uppercase hover:border-b text-xl">Profile</li>
+            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</li>
           </Link>
-        </>
       </ul>
     </div>
   );
