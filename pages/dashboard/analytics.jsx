@@ -10,12 +10,6 @@ const Analytics = () => {
     General info/account connection here... {session.status.data}
     {/* <button onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button> */}
     </div>;
-
-  const session = useSession();
-  return <div>
-    General info/account connection here...{session.status}
-    <button onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
-    </div>;
 };
 
 Analytics.getLayout = (page) => (
