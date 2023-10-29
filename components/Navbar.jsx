@@ -3,11 +3,14 @@ import Link from "next/link";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import Logo from "./Logo";
+import { useSession, signOut } from "next-auth/react";
+
 
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
-
-  const isLoggedIn = true; // TODO: Temp value to hide/show UI. Change to use authentication values
+  
+  const session = useSession();
+  const isLoggedIn = session.status === 'authenticated' ? true : false;
 
   function handleSmallNavMenu() {
     setOpenMenu((menu) => !menu);
@@ -42,8 +45,7 @@ function LargeScreenNavbar({ isLoggedIn }) {
   return (
     <div className="hidden sm:flex">
       <ul className="hidden sm:flex md:flex-row md:space-x-8 md:mt-0 md:border-0">
-        {/* TODO: Server authentication */}
-        {/* {!isLoggedIn && (
+        {!isLoggedIn && (
           <>
             <Link href={"/account/register"}>
               <li className="ml-10 uppercase hover:border-b text-xl">Register</li>
@@ -61,23 +63,9 @@ function LargeScreenNavbar({ isLoggedIn }) {
             <Link href={"/account/profile"}>
               <li className="ml-10 uppercase hover:border-b text-xl">Profile</li>
             </Link>
+            <button className="ml-10 uppercase hover:border-b text-xl" onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
           </>
         )}
-      </ul> */}
-
-   
-          <Link href={"/account/register"}>
-            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">Register</li>
-          </Link>
-          <Link href={"/account/login"}>
-            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</li>
-          </Link>
-          <Link href={"/dashboard/analytics"}>
-            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</li>
-          </Link>
-          <Link href={"/account/profile"}>
-            <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</li>
-          </Link>
       </ul>
     </div>
   );
@@ -134,6 +122,11 @@ function SmallScreenNavbar({ isLoggedIn, handleNav, handleOnClickSmallNavMenu, o
                 <Link href={"/account/profile"}>
                   <li className="py-4 cursor-pointer" onClick={handleOnClickSmallNavMenu}>
                     Profile
+                  </li>
+                </Link>
+                <Link href={"/"}>
+                  <li className="py-4 cursor-pointer" onClick={() => signOut({callbackUrl: "/"})}>
+                    Sign Out
                   </li>
                 </Link>
               </>
