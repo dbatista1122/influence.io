@@ -4,7 +4,7 @@ import Head from "next/head";
 
 const RootLayout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen mx-auto max-w-8xl">
+    <div className="flex flex-col mx-auto max-w-8xl">
       <div className="flex-grow">
         <Head>
           <title>Influence.io</title>
@@ -12,7 +12,9 @@ const RootLayout = ({ children }) => {
         </Head>
 
         <Header />
-        <main className="my-0 py-16">{children}</main>
+        <main className="m-auto pt-16">
+          {children}
+        </main>
       </div>
       <Footer />
     </div>
