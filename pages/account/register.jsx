@@ -174,7 +174,7 @@ function AccountInput({
       </div>
 
       <button className="border-2 border-gray-200 rounded-full px-12 py-2 inline-block font-semibold hover:bg-gray-600 hover:text-white">
-        Sign In
+        Sign Up
       </button>
     </form>
   );
