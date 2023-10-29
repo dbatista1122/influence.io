@@ -109,7 +109,7 @@ function AccountInput({ email, password, setEmailAddress, setPassword, onSubmit 
       </div>
 
       <button className="border-2 rounded-full px-12 py-2 inline-block font-semibold hover:bg-gray-600 hover:text-white">
-        Sign Up
+        Sign In
       </button>
     </form>
   );
