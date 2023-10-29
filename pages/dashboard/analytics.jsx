@@ -1,16 +1,21 @@
 import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
+import { signOut, useSession } from 'next-auth/react';
+
 
 const Analytics = () => {
-<<<<<<< Updated upstream
-  return <div>General info/account connection here...</div>;
-=======
+
   const session = useSession();
   return <div>
     General info/account connection here... {session.status.data}
     {/* <button onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button> */}
     </div>;
->>>>>>> Stashed changes
+
+  const session = useSession();
+  return <div>
+    General info/account connection here...{session.status}
+    <button onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
+    </div>;
 };
 
 Analytics.getLayout = (page) => (
