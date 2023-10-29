@@ -1,58 +1,73 @@
 import RootLayout from "@/components/Layout";
+import Image from "next/image";
+
 
 const Home = () => {
   return (
-    <main className="text-center py-10 px-25">
-      <section className="hero py-5">
-        <div className="hero-content">
-          <h1 className="text-4xl font-bold mb-4">Welcome to Influence.io</h1>
-          <p className="text-lg">
-            the leading platform to make sense of your social media analytics.            
-          </p>
-        </div>
-      </section>
+    <main>
+      <div className="flex flex-col items-center ">
+        <h1 className="text-4xl font-bold mb-4 pt-10">Welcome to Influence.io</h1>
+        <p className="text-2xl">
+          Empower Your Social Media Strategy
+        </p>
+
+        <p className="text-2lg px-40 pt-10 ">
+          At Influence.io, we've revolutionized social media management, 
+          making it simpler and more effective than ever before. 
+          Our platform offers a wide range of benefits to enhance your 
+          social media data analytics experience.          
+        </p>
+      </div>
       
-      <section className="m-14 ">
-        <div className="flex p-5 py-10 justify-center space-x-10">
-          <img
-            src="https://via.placeholder.com/200x150"
-            alt="Feature 1"
-          />
+      <section className="m-14 px-10 bg-red">
+        <div className="flex items-center p-5 py-15 space-x-10">
+          <Image
+            className="basis-1/2"
+            src="/static/ComprehensiveAnalytics.webp"
+            width={5}
+            height={5}  
+            unoptimized          
+            />
           <div>
-            <h2 className="text-xl font-semibold mt-2">Feature 1</h2>
+            <h2 className="basis-1/2 text-xl font-semibold mt-2 p-5 basis-1/2">Comprehensive Analytics</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+              Gain deep insights into your social media performance. Measure engagement, track growth, and uncover what content resonates with your audience.            </p>
           </div>
         </div>
 
-        <div className="flex p-5 py-10 justify-center space-x-10">
+        <div className="flex items-center p-5 py-15 justify-center space-x-10">
           <div>
-            <h2 className="text-xl font-semibold mt-2">Feature 1</h2>
+            <h2 className="basis-1/2 text-xl font-semibold p-5 mt-2">Multi-Platform Integration</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+            Manage multiple social media accounts in one place. Whether it's Facebook, Twitter, Instagram, or LinkedIn, we've got you covered.            </p>
           </div>
-          <img
-            src="https://via.placeholder.com/200x150"
-            alt="Feature 1"
+          <Image
+            className="basis-1/2"
+            src="/static/SocialMediaApps.jpg"
+            width={5}
+            height={5}
+            unoptimized
           />
         
         </div>
 
-        <div className="flex p-5 py-10 justify-center space-x-10">
-          <img
-            src="https://via.placeholder.com/200x150"
-            alt="Feature 1"
+        <div className="flex items-center p-5 py-15 justify-center space-x-10">
+          <Image
+            className="basis-1/2"
+            src="/static/DataSecurity.jpg"
+            width={5}
+            height={5}
+            unoptimized
           />
+
           <div>
-            <h2 className="text-xl font-semibold mt-2">Feature 1</h2>
+            <h2 className="basis-1/2 text-xl font-semibold mt-2 p-5 item-center">Data Security</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </p>
+            Rest easy knowing your data is protected. We employ the highest security standards to keep your information safe and secure.            </p>
           </div>
         </div>
       </section>
+
   </main>
   );
 };

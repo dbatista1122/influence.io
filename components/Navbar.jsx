@@ -48,22 +48,21 @@ function LargeScreenNavbar({ isLoggedIn }) {
         {!isLoggedIn && (
           <>
             <Link href={"/account/register"}>
-              <li className="ml-10 uppercase hover:border-b text-xl">Register</li>
-            </Link>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">Register</li>            </Link>
             <Link href={"/account/login"}>
-              <li className="ml-10 uppercase hover:border-b text-xl">Login</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</li>
             </Link>
           </>
         )}
         {isLoggedIn && (
           <>
             <Link href={"/dashboard/analytics"}>
-              <li className="ml-10 uppercase hover:border-b text-xl">Dashboard</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</li>
             </Link>
             <Link href={"/account/profile"}>
-              <li className="ml-10 uppercase hover:border-b text-xl">Profile</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</li>
             </Link>
-            <button className="ml-10 uppercase hover:border-b text-xl" onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
+            <button className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
           </>
         )}
       </ul>
