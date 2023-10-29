@@ -34,9 +34,8 @@ function SignIn() {
     signIn('credentials', {
       email: emailAddress, 
       password: password,
+      callbackUrl: "/dashboard/analytics"
     });
-
-    router.push("/");
   }
 
   return (

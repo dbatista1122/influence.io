@@ -56,10 +56,8 @@ function SignUp() {
     await signIn('credentials', {
       email: data.user.email,
       password: password,
-      callbackUrl: '/',
+      callbackUrl: '/dashboard/analytics',
     });
-
-    router.push("/");
   }
 
   return (
