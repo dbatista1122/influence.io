@@ -1,8 +1,8 @@
-import RootLayout from "@/components/Layout";
-import DashboardLayout from "@/components/DashboardLayout";
-import { FaGoogle } from "react-icons/fa";
-import React, { useState } from 'react'
-import { GoogleOAuthProvider, useGoogleLogin, googleLogout } from '@react-oauth/google';
+import RootLayout from "@/components/Layout"
+import DashboardLayout from "@/components/DashboardLayout"
+import { FaGoogle } from "react-icons/fa"
+import React, { useState, useEffect, useRef } from 'react'
+import { GoogleOAuthProvider, useGoogleLogin, googleLogout } from '@react-oauth/google'
 
 function Analytics() {
 
@@ -23,6 +23,9 @@ function Analytics() {
              accessToken={accessToken}/>
           )}
         </GoogleOAuthProvider>
+
+        
+
       </DashboardLayout>
     </RootLayout>
   );
@@ -44,7 +47,7 @@ function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
   return (
     <div className="flex flex-col p-5 items-center">
       <div className=" p-5 items-center">
-        <button onClick={() => login()} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-5 py-2 inline-block hover-bg-gray-600 hover-text-white">
+        <button onClick={() => login()} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-gray-600 hover:text-white">
           <div>Add YouTube Account</div>
           <FaGoogle className="text-lg" />
         </button>
@@ -55,8 +58,17 @@ function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
 
 function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
 
+  const [totalSubs, setTotalSubs] = useState(0)
+  const [totalViews, setTotalViews] = useState(0)
+  const [totalVideo, setTotalVideos] = useState(0)
+  const channelURL = useRef(null)
+
+  useEffect(() => {
+    loadChannelData();
+  }, []);
+
   function handleLogout() {
-    setHasGoogleClient(false); // Set the user as logged out
+    setHasGoogleClient(false);
     googleLogout();
   }
 
@@ -90,32 +102,44 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
     const response = await res.json()
     
     const channelName = response.data.items[0].snippet.title;
-    const viewCount = response.data.items[0].statistics.viewCount;
-    const subscriberCount = response.data.items[0].statistics.subscriberCount;
-    const videoCount = response.data.items[0].statistics.videoCount;
+    setTotalViews(response.data.items[0].statistics.viewCount);
+    setTotalSubs(response.data.items[0].statistics.subscriberCount);
+    setTotalVideos(response.data.items[0].statistics.videoCount);
 
     const customUrl = response.data.items[0].snippet.customUrl;
-    const channelUrl = `https://www.youtube.com/${customUrl}`;
+    channelURL.current = `https://www.youtube.com/${customUrl}`;
 
-    // Output the results
-    console.log("Channel Name:", channelName);
-    console.log("View Count:", viewCount);
-    console.log("Subscriber Count:", subscriberCount);
-    console.log("Video Count:", videoCount);
-    console.log("Channel URL:", channelUrl);
-
-  }
+    }
 
   return (
-    <div className="flex flex-col p-5 items-center">
-      <div className=" p-5 items-center">
-        Youtube analytics
-        <button onClick={loadChannelData} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-5 py-2 inline-block hover-bg-gray-600 hover-text-white">
-          <div>LoadData</div>
-        </button>
-        <button onClick={handleLogout} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-5 py-2 inline-block hover-bg-gray-600 hover-text-white">
+    <div className="flex flex-col m-auto p-10">
+      <div className="flex felx-row justify-between p-5">
+        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Subscribers</h4>
+          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalSubs}</h3>
+        </div>
+        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Views</h4>
+          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalViews}</h3>
+        </div>
+        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Videos</h4>
+          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalVideo}</h3>
+        </div>
+      </div>
+      
+
+      <div className="flex flex-row p-5 pt-20">
+        <a 
+          ref={channelURL}
+          href={channelURL.current}
+          target="_blank"
+          rel="noopener noreferrer" 
+          className="mr-auto item-center border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
+          <div>Go to YouTube</div>
+        </a>
+        <button onClick={handleLogout} className="ml-auto item-center border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
           <div>Logout</div>
-          <FaGoogle className="text-lg" />
         </button>
       </div>
     </div>
