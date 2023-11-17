@@ -1,30 +1,28 @@
-import DashboardHeader from "./DashboardHeader";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 
 const DashboardLayout = ({ children }) => {
-  const [currentSocialMedia, setCurrentSocialMedia] = useState("Analytics");
+  const [currentSocialMedia, setCurrentSocialMedia] = useState();
 
   function handleCurrentSocialMedia(socialMedia) {
     setCurrentSocialMedia(socialMedia);
   }
 
-  return (
-    <>
-      <div className="flex">
-        <Sidebar
-          handleCurrentSocialMedia={handleCurrentSocialMedia}
-          currentSocialMedia={currentSocialMedia}
-        />
+  useEffect(function () {
+    setCurrentSocialMedia("Analytics");
+  }, []);
 
-        <main className="ml-20 w-full">
-          <div>
-            <DashboardHeader currentPage={currentSocialMedia} />
-          </div>
-          <div className="m-2">{children}</div>
-        </main>
-      </div>
-    </>
+  return (
+    <div className="flex">
+      <Sidebar
+        handleCurrentSocialMedia={handleCurrentSocialMedia}
+        currentSocialMedia={currentSocialMedia}
+      />
+
+      <main className="ml-20 w-full">
+        <div className="m-2">{children}</div>
+      </main>
+    </div>
   );
 };
 

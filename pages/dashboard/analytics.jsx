@@ -2,7 +2,7 @@ import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 import { signOut, useSession } from "next-auth/react";
 
-const Analytics = () => {
+const DashboardAnalytics = () => {
   const session = useSession();
   return (
     <div>
@@ -12,10 +12,10 @@ const Analytics = () => {
   );
 };
 
-Analytics.getLayout = (page) => (
+DashboardAnalytics.getLayout = (page) => (
   <RootLayout>
     <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 
-export default Analytics;
+export default DashboardAnalytics;

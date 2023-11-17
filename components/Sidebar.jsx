@@ -10,7 +10,7 @@ import {
   SiTwitter,
 } from "react-icons/si";
 
-function Sidebar({ handleCurrentSocialMedia, currentSocialMedia }) {
+const Sidebar = ({ handleCurrentSocialMedia, currentSocialMedia }) => {
   return (
     <div>
       <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between">
@@ -69,7 +69,7 @@ function Sidebar({ handleCurrentSocialMedia, currentSocialMedia }) {
       </div>
     </div>
   );
-}
+};
 
 function SocialMediaLinkButton({
   dashboardPage,

@@ -1,14 +1,14 @@
 import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 
-const Analytics = () => {
+const FacebookAnalytics = () => {
   return <div>Facebook here...</div>;
 };
 
-Analytics.getLayout = (page) => (
+FacebookAnalytics.getLayout = (page) => (
   <RootLayout>
     <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 
-export default Analytics;
+export default FacebookAnalytics;

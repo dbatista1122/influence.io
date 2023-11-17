@@ -1,14 +1,14 @@
 import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 
-const Analytics = () => {
+const TwitterAnalytics = () => {
   return <div>Twitter here...</div>;
 };
 
-Analytics.getLayout = (page) => (
+TwitterAnalytics.getLayout = (page) => (
   <RootLayout>
     <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 
-export default Analytics;
+export default TwitterAnalytics;
