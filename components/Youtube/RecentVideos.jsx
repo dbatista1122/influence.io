@@ -19,16 +19,22 @@ const RecentVideos = () => {
 
             <div className="pl-4">
               <p className="text-gray-800 font-bold w-72 truncate ..."> {video.title}</p>
-              <p className="text-gray-600 text-md">{video.totalViews} views</p>
+              <p className="text-gray-600 text-md">
+                <span className="font-semibold">{video.totalViews}</span> views
+              </p>
             </div>
 
             <div className="absolute right-10 text-sm text-gray-600 grid grid-row-3">
-              <p>{video.totalComments} comments</p>
-              <p className="flex items-center">
-                {video.totalLikes} <AiOutlineLike size={20} />
+              <p>
+                <span className="font-semibold">{video.totalComments}</span> comments
               </p>
               <p className="flex items-center">
-                {video.totalDislikes} <AiOutlineDislike size={20} />
+                <span className="font-semibold">{video.totalLikes}</span>{" "}
+                <AiOutlineLike size={18} />
+              </p>
+              <p className="flex items-center">
+                <span className="font-semibold">{video.totalDislikes}</span>
+                <AiOutlineDislike size={18} />
               </p>
             </div>
           </li>
