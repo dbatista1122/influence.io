@@ -2,89 +2,90 @@ import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 import TopCardsLayout from "@/components/TopCardsLayout";
 import TopCard from "@/components/TopCard";
-import BarChart from "@/components/BarChart";
-import RecentChangesTable from "@/components/RecentChangesTable";
+import BarChart from "@/components/Youtube/BarChart";
+import RecentVideos from "@/components/Youtube/RecentVideos";
+import LineChart from "@/components/Youtube/LineChart";
 
-const dummyData = [
+export const dummyData = [
   {
     id: 1,
-    title: "Test",
-    totalViews: 1234,
-    totalLikes: 50,
-    totalDislikes: 10,
-    totalComments: 35,
+    title: "Exploring Hidden Gems: Uncharted Destinations",
+    totalViews: 56789,
+    totalLikes: 1200,
+    totalDislikes: 500,
+    totalComments: 350,
   },
   {
     id: 2,
-    title: "Test 2",
-    totalViews: 12345,
-    totalLikes: 501,
-    totalDislikes: 105,
-    totalComments: 352,
+    title: "Epic Food Adventure: Tasting Exotic Flavors Around the Globe",
+    totalViews: 98765,
+    totalLikes: 2500,
+    totalDislikes: 300,
+    totalComments: 420,
   },
   {
     id: 3,
-    title: "Test 3",
-    totalViews: 1234,
-    totalLikes: 50,
-    totalDislikes: 10,
-    totalComments: 35,
+    title: "Time-Lapse Cityscape: 24 Hours in the Heart of Metropolis",
+    totalViews: 123456,
+    totalLikes: 3000,
+    totalDislikes: 150,
+    totalComments: 680,
   },
   {
     id: 4,
-    title: "Test 4",
-    totalViews: 6545,
-    totalLikes: 45,
-    totalDislikes: 54,
-    totalComments: 645,
+    title: "DIY Adventure: Crafting the Ultimate Treehouse Oasis",
+    totalViews: 8765,
+    totalLikes: 340,
+    totalDislikes: 50,
+    totalComments: 210,
   },
   {
     id: 5,
-    title: "Test 5",
-    totalViews: 6548,
-    totalLikes: 354,
-    totalDislikes: 35,
-    totalComments: 687,
+    title: "Quest for Mythical Creatures: Deep in the Enchanted Forest",
+    totalViews: 65432,
+    totalLikes: 890,
+    totalDislikes: 120,
+    totalComments: 530,
   },
   {
     id: 6,
-    title: "Test 6 ",
-    totalViews: 3657,
-    totalLikes: 3548,
-    totalDislikes: 68,
-    totalComments: 6578,
+    title: "Tech Unboxed: Unveiling the Latest Gadgets of the Future",
+    totalViews: 54321,
+    totalLikes: 750,
+    totalDislikes: 90,
+    totalComments: 460,
   },
   {
     id: 7,
-    title: "Test 7",
-    totalViews: 6874,
-    totalLikes: 168,
-    totalDislikes: 68,
-    totalComments: 148,
+    title: "Adrenaline Rush: Conquering Fear in Extreme Sports Madness",
+    totalViews: 43210,
+    totalLikes: 630,
+    totalDislikes: 70,
+    totalComments: 390,
   },
   {
     id: 8,
-    title: "Test 8",
-    totalViews: 6549,
-    totalLikes: 3548,
-    totalDislikes: 6878,
-    totalComments: 654,
+    title: "Behind the Scenes Magic: Creating Movie Wonders in Hollywood",
+    totalViews: 87654,
+    totalLikes: 1050,
+    totalDislikes: 180,
+    totalComments: 740,
   },
   {
     id: 9,
-    title: "Test 9",
-    totalViews: 10668,
-    totalLikes: 689,
-    totalDislikes: 1987,
-    totalComments: 5796,
+    title: "Mind-Bending Illusions: Can You Trust Your Eyes?",
+    totalViews: 9876,
+    totalLikes: 420,
+    totalDislikes: 60,
+    totalComments: 280,
   },
   {
     id: 10,
-    title: "Test 10",
-    totalViews: 7866,
-    totalLikes: 7863,
-    totalDislikes: 786,
-    totalComments: 7867,
+    title: "Record-Breaking Challenges: Pushing Limits to the Extreme",
+    totalViews: 76543,
+    totalLikes: 1320,
+    totalDislikes: 140,
+    totalComments: 570,
   },
 ];
 
@@ -120,7 +121,8 @@ const YoutubeAnalytics = () => {
 
       <div className="p-4 grid md:grid-cols-3 grid-cols-1 gap-4">
         <BarChart />
-        <RecentChangesTable />
+        <RecentVideos />
+        <LineChart />
       </div>
     </div>
   );

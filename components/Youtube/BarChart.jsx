@@ -20,30 +20,33 @@ const BarChart = () => {
   const [chartOptions, setChartOptions] = useState({});
 
   useEffect(() => {
-    setChartData({
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ],
-      datasets: [
-        {
-          label: "Subscribers",
-          data: [4582, 5486, 6977, 7651, 8918, 8651, 7862, 9632, 9462, 10351, 15205, 25000],
-          borderColor: "rgb(53, 162, 235)",
-          backgroundColor: "rgb(53, 162, 235, 0.4)",
-        },
-      ],
-    });
+    setChartData(
+      {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+        datasets: [
+          {
+            label: "Subscribers",
+            data: [4582, 5486, 6977, 7651, 8918, 8651, 7862, 9632, 9462, 10351, 15205, 25000],
+            borderColor: "rgb(53, 162, 235)",
+            backgroundColor: "rgb(53, 162, 235, 0.4)",
+          },
+        ],
+      },
+      [chartData]
+    );
 
     setChartOptions({
       plugins: {

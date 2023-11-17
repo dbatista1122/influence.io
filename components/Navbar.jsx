@@ -21,7 +21,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed w-full h-16 shadow-xl bg-gray-600 text-slate-50	font-sans px-10">
+    <nav className=" absolute w-full h-16 shadow-lg bg-gray-600 text-slate-50	font-sans px-10">
       <div className="flex justify-between items-center h-full w-full px-4 2xl:px-16">
         <Logo />
 
