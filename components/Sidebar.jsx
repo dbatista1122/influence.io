@@ -13,10 +13,10 @@ import {
 const Sidebar = ({ handleCurrentSocialMedia, currentSocialMedia }) => {
   return (
     <div>
-      <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between">
+      <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between shadow-lg">
         <div className="flex flex-col items-center">
           <Link href="/">
-            <div className="bg-blue-400 text-white p-3 rounded-lg inline-block hover:bg-blue-300">
+            <div className="bg-blue-500 hover:bg-blue-600 hover:shadow-lg shadow-md text-white p-3 rounded-lg inline-block ">
               <TbTargetArrow size={20} />
             </div>
           </Link>
@@ -83,8 +83,8 @@ function SocialMediaLinkButton({
       <div
         className={
           currentSocialMedia === socialMedia
-            ? "bg-blue-500 hover:bg-blue-300 text-white cursor-pointer my-2 p-3 rounded-lg inline-block"
-            : "bg-gray-100 hover:bg-gray-200 cursor-pointer my-2 p-3 rounded-lg inline-block"
+            ? "bg-blue-600 hover:bg-blue-700 hover:shadow-lg shadow-md text-white cursor-pointer my-2 p-3 rounded-lg inline-block"
+            : "bg-gray-300 hover:bg-gray-400 hover:shadow-lg shadow-md cursor-pointer my-2 p-3 rounded-lg inline-block"
         }
         onClick={() => setSocialMedia(socialMedia)}
       >
