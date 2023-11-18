@@ -1,14 +1,14 @@
 import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 
-const Analytics = () => {
+const TikTokAnalytics = () => {
   return <div>Tiktok here...</div>;
 };
 
-Analytics.getLayout = (page) => (
+TikTokAnalytics.getLayout = (page) => (
   <RootLayout>
     <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 
-export default Analytics;
+export default TikTokAnalytics;
