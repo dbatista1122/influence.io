@@ -24,7 +24,7 @@ const RecentVideos = () => {
               </p>
             </div>
 
-            <div className="absolute right-10 text-sm text-gray-600 grid grid-row-3">
+            <div className="absolute right-10 text-sm text-gray-600 grid grid-row-3 lg:hidden xl:block ">
               <p>
                 <span className="font-semibold">{video.totalComments}</span> comments
               </p>
