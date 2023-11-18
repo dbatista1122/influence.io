@@ -1,14 +1,14 @@
 import RootLayout from "@/components/Layout";
 import DashboardLayout from "@/components/DashboardLayout";
 
-const Analytics = () => {
+const InstagramAnalytics = () => {
   return <div>Instagram here...</div>;
 };
 
-Analytics.getLayout = (page) => (
+InstagramAnalytics.getLayout = (page) => (
   <RootLayout>
     <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 
-export default Analytics;
+export default InstagramAnalytics;

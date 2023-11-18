@@ -5,12 +5,12 @@ import { useState } from "react";
 import Logo from "./Logo";
 import { useSession, signOut } from "next-auth/react";
 
-
 const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  
+
   const session = useSession();
-  const isLoggedIn = session.status === 'authenticated' ? true : false;
+  // const isLoggedIn = session.status === 'authenticated' ? true : false; //TODO: Change back after finishing changes
+  const isLoggedIn = true;
 
   function handleSmallNavMenu() {
     setOpenMenu((menu) => !menu);
@@ -21,11 +21,10 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="fixed w-full h-16 shadow-xl bg-gray-600 text-slate-50	font-sans px-10">
+    <nav className=" absolute w-full h-16 shadow-lg bg-gray-600 text-slate-50	font-sans px-10">
       <div className="flex justify-between items-center h-full w-full px-4 2xl:px-16">
-        
-        <Logo/>
-  
+        <Logo />
+
         <LargeScreenNavbar isLoggedIn={isLoggedIn} />
 
         <HamburgerIcon handleNav={handleSmallNavMenu} />
@@ -48,21 +47,35 @@ function LargeScreenNavbar({ isLoggedIn }) {
         {!isLoggedIn && (
           <>
             <Link href={"/account/register"}>
-              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">Register</li>            </Link>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white">
+                Register
+              </li>{" "}
+            </Link>
             <Link href={"/account/login"}>
-              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                Login
+              </li>
             </Link>
           </>
         )}
         {isLoggedIn && (
           <>
             <Link href={"/dashboard/analytics"}>
-              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Dashboard</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                Dashboard
+              </li>
             </Link>
             <Link href={"/account/profile"}>
-              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</li>
+              <li className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                Profile
+              </li>
             </Link>
-            <button className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent" onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
+            <button
+              className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+              onClick={() => signOut({ callbackUrl: "/" })}
+            >
+              Sign Out
+            </button>
           </>
         )}
       </ul>
@@ -124,7 +137,7 @@ function SmallScreenNavbar({ isLoggedIn, handleNav, handleOnClickSmallNavMenu, o
                   </li>
                 </Link>
                 <Link href={"/"}>
-                  <li className="py-4 cursor-pointer" onClick={() => signOut({callbackUrl: "/"})}>
+                  <li className="py-4 cursor-pointer" onClick={() => signOut({ callbackUrl: "/" })}>
                     Sign Out
                   </li>
                 </Link>
