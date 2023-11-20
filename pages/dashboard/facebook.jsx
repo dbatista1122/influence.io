@@ -43,14 +43,14 @@ const FacebookAnalytics = () => {
           />
         ) : (
           <div>
-            <FacebookAnalytics accessToken={accessToken}/>
+            <FacebookAnalyticsData accessToken={accessToken}/>
           </div>
         ))}
     </div>
   );
 };
 
-function FacebookAnalytics({accessToken}) {
+function FacebookAnalyticsData({accessToken}) {
 
   const [totalFriends, setTotalFriends] = useState(0);
   const [totalLikes, setTotalLikes] = useState(0);
