@@ -12,7 +12,7 @@ export const Profile = () => {
   const router = useRouter();
 
   const { data: session, update } = useSession();
-  const user = session.token;
+  const user = session?.token;
 
   async function handleSubmit(evnt) {
     evnt.preventDefault();

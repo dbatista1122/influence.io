@@ -22,15 +22,14 @@ const FacebookAnalytics = () => {
       const responseData = await response.json();
       setAccessToken(responseData.accountToken.accessToken);
       setHasFacebookClient(true);
-    } else {
-      const errorMessage = await response.text();
-      console.error(`Failed to get access token: ${errorMessage}`);
     }
     setHasCheckedDatabase(true);
   };
 
   // Check for access token in database before page is rendered
-  checkAccessTokenInDatabase();
+  useEffect(() => {
+    checkAccessTokenInDatabase();
+  }, []);
 
   return (
     <div>
@@ -79,17 +78,17 @@ function FacebookAnalyticsData({accessToken}) {
   return (
     <div className="flex flex-col m-auto p-10">
       <div className="flex felx-row justify-between p-5">
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Friends</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalFriends}</h3>
+        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Friends</h4>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalFriends}</h3>
         </div>
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Likes</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalLikes}</h3>
+        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Likes</h4>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalLikes}</h3>
         </div>
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Posts</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalPosts}</h3>
+        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
+          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Posts</h4>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalPosts}</h3>
         </div>
       </div>
     </div>
@@ -103,10 +102,8 @@ function FacebookLoginButton({
   const router = useRouter();
 
   const initiateFacebookLogin = async () => {
-    // TODO: acces app id from env file
-    const clientId = "235716215924183";
-    // TODO: replace with app domain programmatically
-    const redirectUri = "http://localhost:3000/dashboard/facebook";
+    const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID;
+    const redirectUri = window.location.origin + "/dashboard/facebook";
     const params = "csrf=true";
     const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${params}`;
     window.location.href = facebookLoginUrl;
@@ -115,16 +112,18 @@ function FacebookLoginButton({
   const handleFacebookCallback = async () => {
     // get code from url after redirect
     const code = router.query.code;
+    const redirectUri = window.location.origin + "/dashboard/facebook";
 
     // send a POST request to backend with code. Backend will send GET request to Facebook API and retrieve the access_token
     if (code) {
-      const response = await fetch(`/api/facebook/getAccessToken`, {
+      const response = await fetch("/api/facebook/getAccessToken", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           code,
+          redirectUri,
         }),
       });
 
