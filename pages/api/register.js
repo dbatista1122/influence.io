@@ -16,15 +16,17 @@ export default async function handler(req, res) {
     return res.send({ user: null, message: "User already exists" });
   }
 
+  // Combine first name and last name into name
+  const name = firstName + " " + lastName;
+
   // hash password before storing
   const hashedPassword = await bcrypt.hash(password, 10);
-  console.log(firstName, lastName, emailAddress, hashedPassword);
+  console.log(name, emailAddress, hashedPassword);
 
   // Add user to database
   const user = await prisma.user.create({
     data: {
-      firstName: firstName,
-      lastName: lastName,
+      name: name,
       email: emailAddress,
       password: hashedPassword,
     },
