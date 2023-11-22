@@ -13,9 +13,11 @@ const RootLayout = ({ children }) => {
 
         <Header />
         <main className="m-auto pt-16">{children}</main>
-      </div>
-      <Footer />
-    </div>
+        <Footer />
+
+      </div>     
+    </div> 
+  
   );
 };
 
