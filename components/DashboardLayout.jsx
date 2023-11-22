@@ -13,16 +13,13 @@ const DashboardLayout = ({ children }) => {
   }, []);
 
   return (
-    <div className="flex">
+    <main className="flex w-full min-h-screen">
       <Sidebar
         handleCurrentSocialMedia={handleCurrentSocialMedia}
         currentSocialMedia={currentSocialMedia}
       />
-
-      <main className="ml-20 w-full">
-        <div className="m-2">{children}</div>
-      </main>
-    </div>
+      <div className="mx-auto py-10">{children}</div>
+    </main>
   );
 };
 

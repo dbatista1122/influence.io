@@ -1,4 +1,4 @@
-import RootLayout from "@/components/Layout";
+import RootLayout from "@/components/RootLayout";
 import DashboardLayout from "@/components/DashboardLayout";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";

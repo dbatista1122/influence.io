@@ -1,4 +1,4 @@
-import RootLayout from "@/components/Layout";
+import RootLayout from "@/components/RootLayout";
 import DashboardLayout from "@/components/DashboardLayout";
 
 const TikTokAnalytics = () => {
