@@ -1,4 +1,4 @@
-import RootLayout from "@/components/Layout"
+import RootLayout from "@/components/RootLayout"
 import DashboardLayout from "@/components/DashboardLayout"
 import { FaGoogle } from "react-icons/fa"
 import React, { useState, useEffect, useRef } from 'react'
