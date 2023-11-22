@@ -30,12 +30,3 @@ export default async function handler(req, res) {
   
 
 }
-
-async function getDailyViews() {
-
-}
-
-async function getSubscribersGained() {
-    
-}
-
