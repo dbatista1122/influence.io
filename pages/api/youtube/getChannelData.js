@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
     try {
             
-        var key = process.env.YOUTUBE_KEY
+        var key = process.env.GOOGLE_API_KEY
         const { channel } = JSON.parse(req.body)
         const part = "statistics,snippet"
         var address = `https://www.googleapis.com/youtube/v3/channels?part=${part}&id=${channel}&key=${key}`

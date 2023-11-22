@@ -1,5 +1,10 @@
-import RootLayout from "@/components/RootLayout"
-import DashboardLayout from "@/components/DashboardLayout"
+import RootLayout from "@/components/RootLayout";
+import DashboardLayout from "@/components/DashboardLayout";
+import TopCardsLayout from "@/components/TopCardsLayout";
+import TopCard from "@/components/TopCard";
+import BarChart from "@/components/Youtube/BarChart";
+import RecentVideos from "@/components/Youtube/RecentVideos";
+import LineChart from "@/components/Youtube/LineChart";
 import { FaGoogle } from "react-icons/fa"
 import React, { useState, useEffect, useRef } from 'react'
 import { GoogleOAuthProvider, useGoogleLogin, googleLogout } from '@react-oauth/google'
@@ -12,7 +17,7 @@ function Analytics() {
   return (
     <RootLayout>
       <DashboardLayout>
-        <GoogleOAuthProvider clientId="516636552-eemg5hgaqg6ms45n1lcfdmvvvrq4dhlp.apps.googleusercontent.com">
+        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
           {!hasGoogleClient ? (
               <YoutubeLoginButton 
               setHasGoogleClient={setHasGoogleClient} 
@@ -45,13 +50,11 @@ function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
   });
 
   return (
-    <div className="flex flex-col p-5 items-center">
-      <div className=" p-5 items-center">
-        <button onClick={() => login()} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-gray-600 hover:text-white">
+    <div className="flex flex-col items-center">
+        <button onClick={() => login()} className="flex flex-row gap-3 item-center border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
           <div>Add YouTube Account</div>
           <FaGoogle className="text-lg" />
         </button>
-      </div>
     </div>
   );
 }
@@ -113,21 +116,29 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
 
   return (
     <div className="flex flex-col m-auto p-10">
-      <div className="flex felx-row justify-between p-5">
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Subscribers</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalSubs}</h3>
+      <div>
+        <div className="flex w-full gap-5 justify-between"> 
+            <TopCard
+              value={totalSubs}
+              trackedDataName={"Total Subscribers"}
+            />
+            <TopCard
+              value={totalViews}
+              trackedDataName={"Total Views"}
+            />
+            <TopCard
+              value={totalVideo}
+              trackedDataName={"Total Videos"}
+            />
         </div>
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Views</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalViews}</h3>
+        
+
+        <div className="items-center p-4 grid md:grid-cols-3 grid-cols-1 gap-4">
+          {/* <BarChart /> */}
+          {/* <RecentVideos /> */}
+          <LineChart bearerToken={accessToken} />
         </div>
-        <div class="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 class="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Videos</h4>
-          <h3 class="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalVideo}</h3>
-        </div>
-      </div>
-      
+      </div>      
 
       <div className="flex flex-row p-5 pt-20">
         <a 
@@ -146,4 +157,4 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
   );
 }
 
-export default YoutubeAnalytics;
+export default Analytics;

@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const key = process.env.YOUTUBE_KEY;
+        const key = process.env.GOOGLE_API_KEY;
         const { startDate, endDate, metrics, dimensions, bearerToken } = JSON.parse(req.body);
         const address = `https://youtubeanalytics.googleapis.com/v2/reports?startDate=${startDate}&endDate=${endDate}&ids=channel==MINE&metrics=${metrics}&key=${key}&dimensions=${dimensions}`;
 

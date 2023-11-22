@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const key = process.env.YOUTUBE_KEY
+        const key = process.env.GOOGLE_API_KEY
         const address = `https://youtube.googleapis.com/youtube/v3/channels?part=id&mine=true&key=${key}`
         const { bearerToken } = JSON.parse(req.body);
 
