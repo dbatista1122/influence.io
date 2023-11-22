@@ -12,8 +12,7 @@ import {
 
 const Sidebar = ({ handleCurrentSocialMedia, currentSocialMedia }) => {
   return (
-    <div>
-      <div className="fixed w-20 h-screen p-4 bg-white border-r-[1px] flex flex-col justify-between shadow-lg">
+      <div className="w-20 h-auto p-4 bg-white border-r-[1px] flex flex-col justify-between shadow-lg">
         <div className="flex flex-col items-center">
           <Link href="/">
             <div className="bg-blue-500 hover:bg-blue-600 hover:shadow-lg shadow-md text-white p-3 rounded-lg inline-block ">
@@ -67,7 +66,6 @@ const Sidebar = ({ handleCurrentSocialMedia, currentSocialMedia }) => {
           />
         </div>
       </div>
-    </div>
   );
 };
 

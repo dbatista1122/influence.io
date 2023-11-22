@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import RootLayout from "@/components/Layout";
+import RootLayout from "@/components/RootLayout";
 import Image from "next/image";
 
 export const Profile = () => {
