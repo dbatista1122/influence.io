@@ -1,3 +1,5 @@
+'use client'
+
 import RootLayout from "@/components/RootLayout";
 import DashboardLayout from "@/components/DashboardLayout";
 import TopCardsLayout from "@/components/TopCardsLayout";
@@ -17,7 +19,7 @@ function Analytics() {
   return (
     <RootLayout>
       <DashboardLayout>
-        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
+        <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}>
           {!hasGoogleClient ? (
               <YoutubeLoginButton 
               setHasGoogleClient={setHasGoogleClient} 
