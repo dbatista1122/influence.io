@@ -9,8 +9,7 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
 
   const session = useSession();
-  // const isLoggedIn = session.status === 'authenticated' ? true : false; //TODO: Change back after finishing changes
-  const isLoggedIn = true;
+  const isLoggedIn = session.status === 'authenticated' ? true : false;
 
   function handleSmallNavMenu() {
     setOpenMenu((menu) => !menu);
