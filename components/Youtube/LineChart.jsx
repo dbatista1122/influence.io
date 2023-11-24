@@ -1,6 +1,5 @@
-import { Line } from "react-chartjs-2";
-import { faker } from "@faker-js/faker";
-
+import { Line } from 'react-chartjs-2';
+import React, { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,52 +9,126 @@ import {
   Title,
   Tooltip,
   Legend,
-} from "chart.js";
+} from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: "Subscribers vs. Views",
-    },
-    maintainAspectRation: false,
+function LineChart({ accessToken, metric, startDate, endDate }) {
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [
+      {
+        label: metric,
+        data: [],
+        borderColor: 'rgb(255, 57, 75)',
+        backgroundColor: 'rgb(255, 57, 75)',
+      },
+    ],
+  });
+  const [loadingDone, setLoadingDone] = useState(false);
+
+  const options = {
     responsive: true,
-    animation: false,
-  },
-};
-
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "Subscribers",
-      data: labels.map(() => faker.number.int({ min: -1000, max: 1000 })),
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    plugins: {
+      title: {
+        display: true,
+        text: `YouTube Channel ${metric.charAt(0).toUpperCase() + metric.slice(1)}`,
+      },
+      maintainAspectRatio: false,
+      responsive: true,
+      animation: false,
     },
-    {
-      label: "Views",
-      data: labels.map(() => faker.number.int({ min: -1000, max: 1000 })),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+    scales: {
+      x: {
+        ticks: {
+          stepSize: 100,
+        },
+      },
     },
-  ],
-};
+  };
 
-const LineChart = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedData = await getChannelMetrics(accessToken, metric, startDate, endDate);
+        parseData(fetchedData);
+      } catch (error) {
+        console.error('Error fetching or parsing data:', error);
+      } finally {
+        setLoadingDone(true);
+      }
+    };
+
+    fetchData();
+  }, [accessToken, metric, startDate, endDate]);
+
+  async function getChannelMetrics(accessToken, metric, startDate, endDate) {
+    try {
+      const res = await fetch('/api/youtube/getChannelMetrics', {
+        method: 'POST',
+        body: JSON.stringify({
+          startDate,
+          endDate,
+          metrics: metric,
+          dimensions: 'day',
+          bearerToken: accessToken,
+        }),
+      });
+
+      const fetchedData = await res.json();
+      return fetchedData.data.rows;
+    } catch (error) {
+      console.error('Error fetching channel metrics:', error);
+      throw error;
+    }
+  }
+
+  function parseData(dataRows) {
+    try {
+      const labels = [];
+      const data = [];
+
+      dataRows.forEach((element) => {
+        labels.push(element[0]);
+        data.push(element[1]);
+      });
+
+      setChartData({
+        labels,
+        datasets: [
+          {
+            label: metric,
+            data,
+            borderColor: 'rgb(255, 57, 75)',
+            backgroundColor: 'rgb(255, 57, 75)',
+          },
+        ],
+      });
+    } catch (error) {
+      console.error('Error parsing data:', error);
+      throw error;
+    }
+  }
+
   return (
-    <div className="w-full md:col-span-2 relative lg:h-[70vh] h-[50vh] m-auto p-4 border rounded-lg bg-white shadow-md">
-      <Line options={options} data={data} />
+    <div className="w-full pt-15 border rounded-lg bg-white shadow-md">
+      {loadingDone ? (
+        <Line className="w-full max-h-lg p-5" options={options} data={chartData} />
+      ) : (
+        <div className="w-full flex items-center justify-center font-semibold">
+          <p>Loading...</p>
+        </div>
+      )}
     </div>
   );
-};
+}
 
 export default LineChart;

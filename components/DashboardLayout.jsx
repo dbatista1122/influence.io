@@ -18,7 +18,7 @@ const DashboardLayout = ({ children }) => {
         handleCurrentSocialMedia={handleCurrentSocialMedia}
         currentSocialMedia={currentSocialMedia}
       />
-      <div className="mx-auto py-10">{children}</div>
+      <div className="w-5/6 mx-auto py-10">{children}</div>
     </main>
   );
 };
