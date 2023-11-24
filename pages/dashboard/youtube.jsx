@@ -72,7 +72,7 @@ function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
   };
 
   const login = useGoogleLogin({
-    onSuccess: async (codeResponse) => await createAccessToken(codeResponse, setAccessToken, setHasGoogleClient),
+    onSuccess: async (codeResponse) => await createAccessToken(codeResponse),
     scope: 'https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/youtube',
   });
 
