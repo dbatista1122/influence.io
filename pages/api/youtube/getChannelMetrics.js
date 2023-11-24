@@ -16,12 +16,11 @@ export default async function handler(req, res) {
         });
 
         if (!response.ok) {
-        const errorMessage = await response.json();
-        return res.status(response.status).json({ message: `Failed to fetch YouTube channel: ${errorMessage.error.message}` });
+            const errorMessage = await response.json();
+            return res.status(response.status).json({ message: `Failed to fetch YouTube channel: ${errorMessage.error.message}` });
         }
 
         const data = await response.json();
-
         return res.status(200).json({ data });
     } catch (error) {
         console.error('Error fetching metrics:', error.message);

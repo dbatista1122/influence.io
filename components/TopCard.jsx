@@ -9,22 +9,6 @@ const TopCard = ({ colSpanSize, value, trackedDataName, positiveOrNegative, perc
         <p className="text-2xl font-bold">{value}</p>
         <p className="text-gray-600">{trackedDataName}</p>
       </div>
-
-      <p
-        className={
-          positiveOrNegative === "positive"
-            ? "bg-green-200 flex justify-center items-center p-2 rounded-lg"
-            : "bg-red-200 flex justify-center items-center p-2 rounded-lg"
-        }
-      >
-        <span
-          className={
-            positiveOrNegative === "positive" ? "text-green-700 text-lg" : "text-red-700 text-lg"
-          }
-        >
-          {percentageChange}%
-        </span>
-      </p>
     </div>
   );
 };

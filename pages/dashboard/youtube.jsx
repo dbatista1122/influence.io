@@ -3,10 +3,7 @@ import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
 import { FaGoogle } from 'react-icons/fa';
 import RootLayout from '@/components/RootLayout';
 import DashboardLayout from '@/components/DashboardLayout';
-import TopCardsLayout from '@/components/TopCardsLayout';
 import TopCard from '@/components/TopCard';
-import BarChart from '@/components/Youtube/BarChart';
-import RecentVideos from '@/components/Youtube/RecentVideos';
 import LineChart from '@/components/Youtube/LineChart';
 
 function Analytics() {
@@ -52,7 +49,7 @@ function Analytics() {
 }
 
 function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
-  async function createAccessToken(codeResponse, setAccessToken, setHasGoogleClient) {
+  const createAccessToken = async (codeResponse) => {
     if (codeResponse) {
       const response = await fetch('/api/youtube/getAccessToken', {
         method: 'POST',
@@ -72,10 +69,10 @@ function YoutubeLoginButton({ setHasGoogleClient, setAccessToken }) {
         const errorMessage = await response.text();
       }
     }
-  }
+  };
 
   const login = useGoogleLogin({
-    onSuccess: async (codeResponse) => await createAccessToken(codeResponse, setAccessToken, setHasGoogleClient),
+    onSuccess: async (codeResponse) => await createAccessToken(codeResponse),
     scope: 'https://www.googleapis.com/auth/youtubepartner https://www.googleapis.com/auth/youtube.readonly https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/youtube',
   });
 
@@ -96,10 +93,13 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
   const [totalSubs, setTotalSubs] = useState(0);
   const [totalViews, setTotalViews] = useState(0);
   const [totalVideo, setTotalVideos] = useState(0);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const channelURL = useRef(null);
 
   useEffect(() => {
     loadChannelData();
+    loadDateDefault();
   }, []);
 
   async function handleLogout() {
@@ -114,7 +114,7 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         return response.json();
-      })
+      });
   }
 
   async function getChannelId() {
@@ -152,21 +152,54 @@ function YoutubeAnalytics({ setHasGoogleClient, accessToken }) {
     channelURL.current = `https://www.youtube.com/${customUrl}`;
   }
 
+  function loadDateDefault() {
+    const date = new Date();
+
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    setEndDate(`${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`);
+    setStartDate(`${year - 1}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`);
+  }
+
   return (
-    <div className="flex flex-col m-auto p-10">
-      <div className="flex w-full gap-5 justify-between">
+    <div className="flex flex-col m-auto p-10 gap-10">
+      <div className="flex w-5/6 gap-5 m-auto justify-between">
         <TopCard value={totalSubs} trackedDataName={'Total Subscribers'} />
         <TopCard value={totalViews} trackedDataName={'Total Views'} />
         <TopCard value={totalVideo} trackedDataName={'Total Videos'} />
       </div>
 
-      <div className="m-auto w-full items-center pt-4">
-        {/* <BarChart /> */}
-        {/* <RecentVideos /> */}
-        <LineChart bearerToken={accessToken} />
+      <div className="flex w-full m-auto text-sm gap-5 max-w-2xl">
+        <div className="flex w-full text-sm col-span-1 justify-between border p-4 rounded-lg shadow-md">
+          <label className="mr-2">Start Date:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+
+        <div className="flex w-full text-sm justify-between border p-4 rounded-lg shadow-md">
+          <label className="ml-4 mr-2">End Date:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
       </div>
 
-      <div className="flex flex-row p-5 pt-20">
+      {startDate && endDate ? (
+        <div className="flex flex-col m-auto w-5/6 gap-10">
+          <LineChart accessToken={accessToken} metric={'views'} startDate={startDate} endDate={endDate} />
+          <LineChart accessToken={accessToken} metric={'likes'} startDate={startDate} endDate={endDate} />
+          <LineChart accessToken={accessToken} metric={'subscribersGained'} startDate={startDate} endDate={endDate} />
+        </div>
+      ) : null}
+
+      <div className="flex flex-row">
         <a
           ref={channelURL}
           href={channelURL.current}
