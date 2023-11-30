@@ -122,7 +122,7 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
 
   return (
     <div>
-      <div className="grid md:grid-cols-4 grid-cols-1 gap-4 p-4 justify-between">
+      <div className="flex row-span-2 gap-4 p-4">
         <TopCard value={totalFollowers} trackedDataName={'Followers'} />
         <TopCard value={totalPosts} trackedDataName={'Posts'} />
       </div>
@@ -136,7 +136,6 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
             onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
-
         <div className="flex w-full text-sm justify-between border p-4 rounded-lg shadow-md">
           <label className="ml-4 mr-2">End Date:</label>
           <input
@@ -148,14 +147,16 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
       </div>
 
       {startDate && endDate ? (
-        <div className="p-4 grid md:grid-cols-6 grid-cols-1 gap-4">
-          <LineChart title={"Impressions"} arrayData={impressions} startDate={startDate} endDate={endDate} />
-          <LineChart title={"Reach"} arrayData={reach} startDate={startDate} endDate={endDate} />
-          <TopCard value={totalInteractions} trackedDataName={'Interactions'} />
-          <TopCard value={totalLikes} trackedDataName={'Likes'} />
-          <TopCard value={totalProfileViews} trackedDataName={'Profile Views'} />
+        <div className="p-4 gap-4">
+          <LineChart titles={["Impressions", "Reach"]} lists={[impressions, reach]} startDate={startDate} endDate={endDate} />
         </div>
       ) : null}
+
+      <div className="grid md:grid-cols-6 grid-cols-1 gap-4 p-4 justify-between">
+        <TopCard value={totalInteractions} trackedDataName={'Interactions'} />
+        <TopCard value={totalLikes} trackedDataName={'Likes'} />
+        <TopCard value={totalProfileViews} trackedDataName={'Profile Views'} />
+      </div>
 
       <button
         onClick={handleLogout}

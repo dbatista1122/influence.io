@@ -123,7 +123,7 @@ function FacebookAnalyticsData({ accessToken, setHasFacebookClient, setAccessTok
       <div className="grid md:grid-cols-6 grid-cols-1 gap-4 p-4 justify-between">
         <TopCard value={totalFollowers} trackedDataName={'Followers'} />
         <TopCard value={totalRatings} trackedDataName={'Ratings'} />
-        <TopCard value={talkingAboutCount} trackedDataName={'Talking About Count'} />
+        <TopCard value={talkingAboutCount} trackedDataName={'People Talking About This'} />
       </div>
 
       <div className="flex w-full m-auto text-sm gap-5 max-w-2xl">
@@ -147,10 +147,8 @@ function FacebookAnalyticsData({ accessToken, setHasFacebookClient, setAccessTok
       </div>
 
       {startDate && endDate ? (
-        <div className="p-4 grid md:grid-cols-6 grid-cols-1 gap-4">
-          <LineChart title={"Post Engagements"} arrayData={postEngagments} startDate={startDate} endDate={endDate} />
-          <LineChart title={"Impressions"} arrayData={impressions} startDate={startDate} endDate={endDate} />
-          <LineChart title={"Page Views"} arrayData={totalViews} startDate={startDate} endDate={endDate} />
+        <div className="p-4 gap-4">
+          <LineChart titles={["Post Engagements", "Impressions", "Page Views"]} lists={[postEngagments, impressions, totalViews]} startDate={startDate} endDate={endDate} />
         </div>
       ) : null}
 

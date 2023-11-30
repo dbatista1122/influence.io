@@ -1,4 +1,5 @@
 import { Line } from "react-chartjs-2";
+import React, { useState } from 'react';
 
 import {
   Chart as ChartJS,
@@ -13,7 +14,9 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const LineChart = ({ title, arrayData, startDate, endDate }) => {
+const LineChart = ({ titles, lists, startDate, endDate }) => {
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const options = {
     responsive: true,
@@ -23,7 +26,7 @@ const LineChart = ({ title, arrayData, startDate, endDate }) => {
       },
       title: {
         display: true,
-        text: title,
+        text: titles[selectedIndex],
       },
       maintainAspectRation: false,
       responsive: true,
@@ -37,8 +40,8 @@ const LineChart = ({ title, arrayData, startDate, endDate }) => {
     labels,
     datasets: [
       {
-        label: title,
-        data: arrayData,
+        label: titles[selectedIndex],
+        data: lists[selectedIndex],
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       }
@@ -47,6 +50,13 @@ const LineChart = ({ title, arrayData, startDate, endDate }) => {
 
   return (
     <div className="md:col-span-6 relative m-auto p-4 border rounded-lg bg-white shadow-md">
+      <select value={selectedIndex} onChange={(e) => setSelectedIndex(Number(e.target.value))}>
+        {titles.map((title, index) => (
+          <option key={title} value={index}>
+            {title}
+          </option>
+        ))}
+      </select>
       <Line options={options} data={data} />
     </div>
   );
