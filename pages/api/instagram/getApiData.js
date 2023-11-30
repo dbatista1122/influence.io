@@ -135,9 +135,7 @@ export default async function handler(req, res) {
 
       const { totalFollowers, totalPosts } = await getInstagramDataBasic(
         accessToken,
-        instagramId,
-        startDate,
-        endDate
+        instagramId
       );
 
       const { totalInteractions, totalLikes, totalProfileViews } =
