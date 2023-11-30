@@ -107,17 +107,17 @@ export default async function handler(req, res) {
 
     if (usePlaceholderData) {
       const totalFollowers = 6732;
-      const totalPosts = 34;
+      const totalPosts = 346;
       const totalInteractions = 142023;
       const totalLikes = 98364;
       const totalProfileViews = 19093;
       const impressions = [
         6516, 6105, 5691, 6356, 7516, 6481, 6822, 7007, 7509, 7429, 7668, 8160,
-        6541, 6841, 8839, 9192, 10656, 9979, 10416, 9985,
+        6541, 6841, 8839, 9192, 10656, 9979, 10416, 9985, 9823, 9234,
       ];
       const reach = [
         1239, 1389, 2348, 1792, 1956, 2134, 1678, 2212, 1890, 2085, 1567, 2467,
-        2012, 1834, 2098, 1745, 1987, 2279, 1936, 2512,
+        2012, 1834, 2098, 1745, 1987, 2279, 1936, 2512, 1569, 2569, 3564,
       ];
 
       return res.status(200).json({

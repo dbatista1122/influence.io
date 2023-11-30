@@ -70,7 +70,7 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
   useEffect(() => {
     getApiData(accessToken);
     loadDateDefault();
-  })
+  }, [])
 
   async function handleLogout() {
     const response = await fetch('/api/facebook/getAccessToken', {
@@ -122,13 +122,16 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
 
   return (
     <div>
-      <div className="flex row-span-2 gap-4 p-4">
+      <div className="grid md:grid-cols-10 grid-cols-1 gap-4 p-2 justify-between">
         <TopCard value={totalFollowers} trackedDataName={'Followers'} />
         <TopCard value={totalPosts} trackedDataName={'Posts'} />
+        <TopCard value={totalInteractions} trackedDataName={'Interactions'} />
+        <TopCard value={totalLikes} trackedDataName={'Likes'} />
+        <TopCard value={totalProfileViews} trackedDataName={'Profile Views'} />
       </div>
 
-      <div className="flex w-full m-auto text-sm gap-5 max-w-2xl">
-        <div className="flex w-full text-sm col-span-1 justify-between border p-4 rounded-lg shadow-md">
+      <div className="flex row-span-2 gap-4 p-2 justify-center">
+        <div className="flex text-sm justify-between border p-4 rounded-lg shadow-md">
           <label className="mr-2">Start Date:</label>
           <input
             type="date"
@@ -136,8 +139,8 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
             onChange={(e) => setStartDate(e.target.value)}
           />
         </div>
-        <div className="flex w-full text-sm justify-between border p-4 rounded-lg shadow-md">
-          <label className="ml-4 mr-2">End Date:</label>
+        <div className="flex text-sm justify-between border p-4 rounded-lg shadow-md">
+          <label className="mr-2">End Date:</label>
           <input
             type="date"
             value={endDate}
@@ -147,22 +150,19 @@ function InstagramAnalyticsData({ accessToken, setHasFacebookClient, setAccessTo
       </div>
 
       {startDate && endDate ? (
-        <div className="p-4 gap-4">
+        <div className="p-2 gap-4">
           <LineChart titles={["Impressions", "Reach"]} lists={[impressions, reach]} startDate={startDate} endDate={endDate} />
         </div>
       ) : null}
 
-      <div className="grid md:grid-cols-6 grid-cols-1 gap-4 p-4 justify-between">
-        <TopCard value={totalInteractions} trackedDataName={'Interactions'} />
-        <TopCard value={totalLikes} trackedDataName={'Likes'} />
-        <TopCard value={totalProfileViews} trackedDataName={'Profile Views'} />
+      <div className="flex justify-center p-2">
+        <button
+          onClick={handleLogout}
+          className="border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
+          Logout
+        </button>
       </div>
-
-      <button
-        onClick={handleLogout}
-        className="ml-auto border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
-        Logout
-      </button>
+      
     </div>
   );
 }
