@@ -3,6 +3,8 @@ import DashboardLayout from "@/components/DashboardLayout";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { FaFacebook } from "react-icons/fa";
+import TopCard from '@/components/Instagram/TopCard';
+import LineChart from '@/components/Instagram/LineChart';
 
 const FacebookAnalytics = () => {
   const [hasFacebookClient, setHasFacebookClient] = useState(false);
@@ -42,54 +44,119 @@ const FacebookAnalytics = () => {
           />
         ) : (
           <div>
-            <FacebookAnalyticsData accessToken={accessToken}/>
+            <FacebookAnalyticsData 
+              accessToken={accessToken}
+              setHasFacebookClient={setHasFacebookClient}
+              setAccessToken={setAccessToken}
+            />
           </div>
         ))}
     </div>
   );
 };
 
-function FacebookAnalyticsData({accessToken}) {
+function FacebookAnalyticsData({ accessToken, setHasFacebookClient, setAccessToken }) {
+  const [totalFollowers, setTotalFollowers] = useState(0);
+  const [totalRatings, setTotalRatings] = useState(0);
+  const [talkingAboutCount, setTalkingAboutCount] = useState(0);
+  const [postEngagments, setPostEngagements] = useState([]);
+  const [impressions, setImpressions] = useState([]);
+  const [totalViews, setTotalViews] = useState([]);
 
-  const [totalFriends, setTotalFriends] = useState(0);
-  const [totalLikes, setTotalLikes] = useState(0);
-  const [totalPosts, setTotalPosts] = useState(0);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
-  async function getApiData() {
-    // Make API call to backend to retrieve data from Facebook API
+  useEffect(() => {
+    getApiData(accessToken);
+    loadDateDefault();
+  }, [])
+
+  async function getApiData(accessToken) {
     const res = await fetch(`/api/facebook/getApiData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        accessToken: accessToken
+        accessToken: accessToken,
+        startDate: startDate,
+        endDate: endDate,
+        usePlaceholderData: true,
       })
     });
 
-    const response = await res.json();
-    setTotalFriends(response.totalFriends);
-    setTotalLikes(response.totalLikes);
-    setTotalPosts(response.totalPosts);
+    const { totalFollowers, totalRatings, talkingAboutCount, postEngagments, impressions, totalViews } = await res.json();
+    setTotalFollowers(totalFollowers);
+    setTotalRatings(totalRatings);
+    setTalkingAboutCount(talkingAboutCount);
+    setPostEngagements(postEngagments);
+    setImpressions(impressions);
+    setTotalViews(totalViews);
   }
 
-  getApiData();
+  async function handleLogout() {
+    const response = await fetch('/api/facebook/getAccessToken', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      setAccessToken("");
+      setHasFacebookClient(false);
+    } else {
+      console.error(`Failed to delete access token: ${response}`);
+    }
+  }
+
+  function loadDateDefault() {
+    const date = new Date();
+    const prevDate = new Date(date - (20 * 1000 * 60 * 60 * 24)) // Start date will be set to 20 days prior
+
+    setEndDate(date.toISOString().split("T")[0]);
+    setStartDate(prevDate.toISOString().split("T")[0]);
+  }
 
   return (
-    <div className="flex flex-col m-auto p-10">
-      <div className="flex felx-row justify-between p-5">
-        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Friends</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalFriends}</h3>
+    <div>
+      <div className="grid md:grid-cols-6 grid-cols-1 gap-4 p-2 justify-between">
+        <TopCard value={totalFollowers} trackedDataName={'Followers'} />
+        <TopCard value={totalRatings} trackedDataName={'Ratings'} />
+        <TopCard value={talkingAboutCount} trackedDataName={'People Talking About This'} />
+      </div>
+
+      <div className="flex row-span-2 gap-4 p-2 justify-center">
+        <div className="flex text-sm justify-between border p-4 rounded-lg shadow-md">
+          <label className="mr-2">Start Date:</label>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
         </div>
-        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Likes</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalLikes}</h3>
+        <div className="flex text-sm justify-between border p-4 rounded-lg shadow-md">
+          <label className="mr-2">End Date:</label>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
         </div>
-        <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
-          <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Total Posts</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{totalPosts}</h3>
+      </div>
+
+      {startDate && endDate ? (
+        <div className="p-2 gap-4">
+          <LineChart titles={["Post Engagements", "Impressions", "Page Views"]} lists={[postEngagments, impressions, totalViews]} startDate={startDate} endDate={endDate} />
         </div>
+      ) : null}
+
+      <div className="flex justify-center p-2">
+        <button
+          onClick={handleLogout}
+          className="border-2 rounded-full text-sm px-4 py-1 inline-block hover:bg-red-500 hover:text-white">
+          Logout
+        </button>
       </div>
     </div>
   );
@@ -105,7 +172,8 @@ function FacebookLoginButton({
     const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID;
     const redirectUri = window.location.origin + "/dashboard/facebook";
     const params = "csrf=true";
-    const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${params}`;
+    const scope = "pages_show_list,business_management,instagram_basic,instagram_manage_insights,pages_read_engagement"
+    const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${params}&scope=${scope}`;
     window.location.href = facebookLoginUrl;
   };
 

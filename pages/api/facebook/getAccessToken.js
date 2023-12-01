@@ -95,7 +95,7 @@ export default async function handler(req, res) {
           name: "facebook",
           accessToken: data.access_token,
           tokenType: data.token_type,
-          expires: new Date(Date.now() + data.expires_in * 1000),
+          expires: new Date(Date.now() + 50 * 24 * 60 * 60 * 1000),
         },
       });
 
@@ -103,6 +103,35 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error("Error fetching Facebook access token: ", error.message);
       return res.status(500).json({ message: "Internal server error" });
+    }
+  }
+
+  if (req.method == "DELETE") {
+    // Remove access token from the database to log out user
+    const userId = await getUserId(email);
+
+    try {
+      const facebookToken = await prisma.accountToken.findFirst({
+        where: {
+          userId: userId,
+          name: "facebook",
+        },
+      });
+
+      if (facebookToken) {
+        await prisma.accountToken.delete({
+          where: {
+            id: facebookToken.id,
+          },
+        });
+        return res.status(200).json("Facebook token deleted.");
+      } else {
+        return res.status(404).json("Facebook token not found.");
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .json(`Error deleting Facebook token: ${error.message}`);
     }
   }
 }
