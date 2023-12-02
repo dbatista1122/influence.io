@@ -21,7 +21,8 @@ model Account {
   scope              String?
   id_token           String?  @db.Text
   session_state      String?
-
+  ouath_token        String?
+  oauth_token_secret String?
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -33,6 +34,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ouath_token        String?
+  oauth_token_secret String?
 }
 
 model AccountToken {
@@ -43,11 +46,14 @@ model AccountToken {
   tokenType   String?
   expires     DateTime?
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ouath_token        String?
+  oauth_token_secret String?
 }
 
 model User {
   id            String    @id @default(cuid())
   name     String?
+  username      String?
   email         String?   @unique
   password      String?
   emailVerified DateTime?
@@ -55,12 +61,16 @@ model User {
   accounts      Account[]
   sessions      Session[]
   accountTokens AccountToken[]
+  ouath_token        String?
+  oauth_token_secret String?
 }
 
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
+  ouath_token        String?
+  oauth_token_secret String?
 
   @@unique([identifier, token])
 
