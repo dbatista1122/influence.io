@@ -24,8 +24,8 @@ export default NextAuth({
       clientId: process.env.TWITTER_CLIENT_ID,
       clientSecret: process.env.TWITTER_CLIENT_SECRET,
       //version: "1.0A"
-      version: "2.0",
-      checks: ["pkce", "state"],
+      //version: "2.0",
+      //checks: ["pkce", "state"],
       
       /*
       version: "2.0",
