@@ -193,7 +193,7 @@ function TwitterAnalyticsData ({ accessToken}){
         </div>
         <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
           <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Link Clicks</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{null}</h3>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{"null"}</h3>
         </div>
       </div>
     </div>

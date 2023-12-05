@@ -23,8 +23,8 @@ export async function getApiData(access_token) {
     // Handle errors
     console.error('Error in Twitter API call:', error);
   }
-}
 
+}
 /*
 export default async function handler (req,res){
     if(req.method !== "POST"){
