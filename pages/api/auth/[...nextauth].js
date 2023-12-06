@@ -29,7 +29,6 @@ export default NextAuth({
         password: { type: "password", placeholder: "password" },
       },
       async authorize(credentials) {
-        console.log("This is running!!");
         const { email, password } = credentials;
         const user = await prisma.user.findUnique({
           where: { email },
@@ -37,7 +36,6 @@ export default NextAuth({
         if (!user) return null;
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) return null;
-        console.log(user);
         return user;
       },
     }),
