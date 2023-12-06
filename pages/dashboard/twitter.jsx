@@ -64,11 +64,13 @@ function TwitterAnalyticsData ({ accessToken}){
         accessToken: accessToken
       })
     });
+    /*
     const response = await res.json();
     setTotalRT(response.retweet_count);
     setTotalReply(response.reply_count);
     setTotalLike(response.like_count);
     setTotalImpressions(response.impressions);
+    */
   }
   getApiData();
 
