@@ -19,8 +19,8 @@ export default NextAuth({
       clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     }),
     TwitterProvider({
-      clientId: process.env.TWITTER_CLIENT_ID,
-      clientSecret: process.env.TWITTER_CLIENT_SECRET,
+      clientId: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET,
     }),
     CredentialsProvider({
       type: "credentials",
@@ -31,7 +31,7 @@ export default NextAuth({
       async authorize(credentials) {
         console.log("This is running!!");
         const { email, password } = credentials;
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
           where: { email },
         });
         if (!user) return null;
