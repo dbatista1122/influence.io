@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope, FaUserCircle } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 import Logo from "../../components/Logo";
 
 function Register() {
@@ -33,7 +33,7 @@ function SignUp() {
     const res = await fetch("/api/register", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         firstName,
@@ -48,16 +48,15 @@ function SignUp() {
     if (!data.user) return null;
 
     // Use next-auth to login user
-    await signIn('credentials', {
+    await signIn("credentials", {
       email: data.user.email,
       password: password,
-      callbackUrl: '/dashboard/analytics',
+      callbackUrl: "/dashboard/facebook",
     });
   }
 
   return (
     <div className="w-3/5 p-5 ">
-
       <div className="py-10">
         <h2 className="text-3xl font-bold">Sign up for an account</h2>
 
@@ -86,13 +85,25 @@ function SignUp() {
 function SocialMediaLogin() {
   return (
     <div className="flex justify-center my-2">
-      <Link href={"/"} onClick={() => signIn('google')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("google")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaGoogle className="text-sm" />
       </Link>
-      <Link href={"/"} onClick={() => signIn('facebook')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("facebook")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaFacebookF className="text-sm" />
       </Link>
-      <Link href={"/"} onClick={() => signIn('twitter')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("twitter")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaTwitter className="text-sm" />
       </Link>
     </div>
@@ -179,7 +190,7 @@ function SignIn() {
   return (
     <div className="flex flex-col items-center bg-gray-600 object-center text-white py-20">
       <div className="py-10">
-        <Logo/>
+        <Logo />
       </div>
       <div>
         <h2 className="text-3xl font-bold mb-2">Welcome to Influence.io</h2>
@@ -191,7 +202,7 @@ function SignIn() {
         >
           Sign In
         </Link>
-      </div>   
+      </div>
     </div>
   );
 }
