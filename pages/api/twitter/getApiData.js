@@ -34,7 +34,7 @@ export async function getApiData(access_token) {
   }
 
 }
-/*
+
 export default async function handler(req, res) {
     // Your existing code for the API route
     try {
@@ -46,4 +46,3 @@ export default async function handler(req, res) {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   }
-*/
