@@ -77,15 +77,15 @@ function TwitterAnalyticsData ({ accessToken}){
       <div className="flex felx-row justify-between p-5">
         <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
           <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Retweets</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{1}</h3>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{0}</h3>
         </div>
         <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
           <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Replies</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{2}</h3>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{1}</h3>
         </div>
         <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
           <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Likes</h4>
-          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{6}</h3>
+          <h3 className="mb-3 font-xl text-gray-700 dark:text-gray-400">{4}</h3>
         </div>
         <div className="items-center w-3/12 p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-600 dark:border-gray-700">
           <h4 className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">Impressions</h4>
