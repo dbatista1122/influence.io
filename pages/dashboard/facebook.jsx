@@ -172,8 +172,7 @@ function FacebookLoginButton({
     const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID;
     const redirectUri = window.location.origin + "/dashboard/facebook";
     const params = "csrf=true";
-    const scope = "pages_show_list,business_management,instagram_basic,instagram_manage_insights,pages_read_engagement"
-    const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${params}&scope=${scope}`;
+    const facebookLoginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&state=${params}`;
     window.location.href = facebookLoginUrl;
   };
 
