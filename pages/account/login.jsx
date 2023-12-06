@@ -28,9 +28,7 @@ function SignIn() {
 
   async function handleSubmit(evnt) {
     evnt.preventDefault();
-
-    console.log(`Email Address: ${emailAddress} Password: ${password}`);
-
+    
     signIn('credentials', {
       email: emailAddress, 
       password: password,

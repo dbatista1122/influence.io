@@ -17,10 +17,6 @@ export const Profile = () => {
   async function handleSubmit(evnt) {
     evnt.preventDefault();
 
-    console.log(
-      `First Name: ${firstName} Last Name: ${lastName} Email Address: ${emailAddress}`
-    );
-
     await fetch("/api/updateUser", {
       method: "POST",
       headers: {
@@ -35,34 +31,35 @@ export const Profile = () => {
     });
 
     update();
-
+    location.reload();
+    
     router.push("/");
   }
 
   return (
     <RootLayout>
-      <div className="flex flex-col content-center max-w-[80%] mx-auto">
-        <div className="flex flex-col mx-auto py-10">
+      <div className="flex flex-col content-center max-w-[80%] mx-auto py-10">
           {session && user && (
-            <Image
-              className="items-center rounded-full border border-gray-600"
-              loader={({ src }) => src}
-              src={user.picture || "/static/DataSecurity.jpg"}
-              width={200}
-              height={200}
-              alt="Profile Picture"
-              unoptimized
-              priority={true}
-              style={{
-                objectFit: "cover",
-              }}
-            />
-          )}
-          <h3 className="text-3xl md:text-4xl font-bold">
+          <Image
+            className="mx-auto rounded-full border border-gray-600"
+            loader={({ src }) => src}
+            src={user.picture || "/static/DefaultPfp.png"}
+            width={200}
+            height={200}
+            alt="Profile Picture"
+            unoptimized
+            priority={true}
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        )}
+        <div className="flex flex-col mx-auto pt-2">
+          <h3 className="text-3xl md:text-4xl font-bold p-2">
             {user ? `${user.name}` : "Loading..."}
           </h3>
         </div>
-        <div className="content-start">
+        <div className="content-start pt-20">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-row items-center px-5 py-5">
               <label
@@ -75,7 +72,7 @@ export const Profile = () => {
                 type="text"
                 id="first_name"
                 className="basis-3/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="First Name"
+                placeholder= {user ? `${user.name.split(" ")[0]}` : "First Name"}
                 value={firstName}
                 onChange={(evnt) => setFirstName(evnt.target.value)}
                 required
@@ -92,7 +89,7 @@ export const Profile = () => {
                 type="text"
                 id="last_name"
                 className="basis-3/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Last Name"
+                placeholder= {user ? `${user.name.split(" ")[1]}` : "Last Name"}
                 value={lastName}
                 onChange={(evnt) => setLastName(evnt.target.value)}
                 required
@@ -109,7 +106,7 @@ export const Profile = () => {
                 type="email"
                 id="email"
                 className="basis-3/4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Email Address"
+                placeholder= {user ? `${user.email}` : "Email Address"}
                 value={emailAddress}
                 onChange={(evnt) => setEmailAddress(evnt.target.value)}
                 required
