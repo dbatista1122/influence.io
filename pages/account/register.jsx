@@ -30,10 +30,6 @@ function SignUp() {
   async function handleSubmit(evnt) {
     evnt.preventDefault();
 
-    console.log(
-      `First Name: ${firstName} Last Name: ${lastName} Email Address: ${emailAddress} Password: ${password}`
-    );
-
     const res = await fetch("/api/register", {
       method: "POST",
       headers: {
@@ -49,7 +45,6 @@ function SignUp() {
 
     // Check if user has been created
     const data = await res.json();
-    console.log(data);
     if (!data.user) return null;
 
     // Use next-auth to login user
