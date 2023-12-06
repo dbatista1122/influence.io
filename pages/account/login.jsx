@@ -3,9 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { FaGoogle, FaFacebookF, FaTwitter, FaRegEnvelope } from "react-icons/fa";
 import { MdLockOutline } from "react-icons/md";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 import Logo from "../../components/Logo";
-
 
 function Login() {
   return (
@@ -31,10 +30,10 @@ function SignIn() {
 
     console.log(`Email Address: ${emailAddress} Password: ${password}`);
 
-    signIn('credentials', {
-      email: emailAddress, 
+    signIn("credentials", {
+      email: emailAddress,
       password: password,
-      callbackUrl: "/dashboard/analytics"
+      callbackUrl: "/dashboard/facebook",
     });
   }
 
@@ -64,13 +63,25 @@ function SignIn() {
 function SocialMediaLogin() {
   return (
     <div className="flex justify-center my-2">
-      <Link href={"/"} onClick={() => signIn('google')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("google")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaGoogle className="text-sm" />
       </Link>
-      <Link href={"/"} onClick={() => signIn('facebook')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("facebook")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaFacebookF className="text-sm" />
       </Link>
-      <Link href={"/"} onClick={() => signIn('twitter')} className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200">
+      <Link
+        href={"/"}
+        onClick={() => signIn("twitter")}
+        className="border-2 border-gray-200 rounded-full p-3 mx-1 hover:bg-gray-200"
+      >
         <FaTwitter className="text-sm" />
       </Link>
     </div>
@@ -119,7 +130,7 @@ function SignUp() {
   return (
     <div className="w-2/5 flex flex-col items-center bg-gray-600 text-white p-12">
       <div className="pb-16">
-        <Logo/>
+        <Logo />
       </div>
       <h2 className="text-3xl font-bold mb-2">Welcome to Influence.io</h2>
       <div className="border-2 w-10 border-white inline-block mb-2"></div>
