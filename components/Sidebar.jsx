@@ -12,60 +12,47 @@ import {
 
 const Sidebar = ({ handleCurrentSocialMedia, currentSocialMedia }) => {
   return (
-      <div className="w-20 h-auto p-4 bg-white border-r-[1px] flex flex-col justify-between shadow-lg">
-        <div className="flex flex-col items-center">
-          <Link href="/">
-            <div className="bg-blue-500 hover:bg-blue-600 hover:shadow-lg shadow-md text-white p-3 rounded-lg inline-block ">
-              <TbTargetArrow size={20} />
-            </div>
-          </Link>
+    <div className="w-20 h-auto p-4 bg-white border-r-[1px] flex flex-col justify-between shadow-lg">
+      <div className="flex flex-col items-center">
+        <Link href="/">
+          <div className="bg-blue-500 hover:bg-blue-600 hover:shadow-lg shadow-md text-white p-3 rounded-lg inline-block ">
+            <TbTargetArrow size={20} />
+          </div>
+        </Link>
 
-          <span className="border-b-[1px] border-gray-200 w-full p-2 mb-4"></span>
+        <span className="border-b-[1px] border-gray-200 w-full p-2 mb-4"></span>
 
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/analytics"}
-            socialMedia={"Analytics"}
-            socialMediaIcon={<SiGoogleanalytics size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/facebook"}
-            socialMedia={"Facebook"}
-            socialMediaIcon={<SiFacebook size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/instagram"}
-            socialMedia={"Instagram"}
-            socialMediaIcon={<SiInstagram size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/tiktok"}
-            socialMedia={"Tik Tok"}
-            socialMediaIcon={<SiTiktok size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/youtube"}
-            socialMedia={"Youtube"}
-            socialMediaIcon={<SiYoutube size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-          <SocialMediaLinkButton
-            dashboardPage={"/dashboard/twitter"}
-            socialMedia={"Twitter"}
-            socialMediaIcon={<SiTwitter size={20} />}
-            setSocialMedia={handleCurrentSocialMedia}
-            currentSocialMedia={currentSocialMedia}
-          />
-        </div>
+        <SocialMediaLinkButton
+          dashboardPage={"/dashboard/facebook"}
+          socialMedia={"Facebook"}
+          socialMediaIcon={<SiFacebook size={20} />}
+          setSocialMedia={handleCurrentSocialMedia}
+          currentSocialMedia={currentSocialMedia}
+        />
+        <SocialMediaLinkButton
+          dashboardPage={"/dashboard/instagram"}
+          socialMedia={"Instagram"}
+          socialMediaIcon={<SiInstagram size={20} />}
+          setSocialMedia={handleCurrentSocialMedia}
+          currentSocialMedia={currentSocialMedia}
+        />
+
+        <SocialMediaLinkButton
+          dashboardPage={"/dashboard/youtube"}
+          socialMedia={"Youtube"}
+          socialMediaIcon={<SiYoutube size={20} />}
+          setSocialMedia={handleCurrentSocialMedia}
+          currentSocialMedia={currentSocialMedia}
+        />
+        <SocialMediaLinkButton
+          dashboardPage={"/dashboard/twitter"}
+          socialMedia={"Twitter"}
+          socialMediaIcon={<SiTwitter size={20} />}
+          setSocialMedia={handleCurrentSocialMedia}
+          currentSocialMedia={currentSocialMedia}
+        />
       </div>
+    </div>
   );
 };
 
